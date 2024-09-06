@@ -29,9 +29,12 @@ const TokenPage = () => {
     }, [searchParams]);
 
     useEffect(() => {
-        const storedMetadata = localStorage.getItem('tokenMetadata');
-        if (storedMetadata && mintAddress) {
-            setTokenMetadata(JSON.parse(storedMetadata));
+       
+        if (typeof window !== 'undefined') {
+            const storedMetadata = localStorage.getItem('tokenMetadata');
+            if (storedMetadata && mintAddress) {
+                setTokenMetadata(JSON.parse(storedMetadata));
+            }
         }
     }, [mintAddress]);
 
