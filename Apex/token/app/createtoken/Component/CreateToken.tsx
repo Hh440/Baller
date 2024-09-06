@@ -34,10 +34,10 @@ const CreateToken = () => {
                 145, 212, 78, 188, 1, 247, 36, 222, 172, 170, 189, 42, 250, 154, 236, 
                 158, 214, 230, 146
             ]));
-            console.log(payer);
+            
 
             const mintAuthority = payer.publicKey;
-            console.log(mintAuthority);
+           
 
             const mint = await createMint(
                 connection,
@@ -82,15 +82,15 @@ const CreateToken = () => {
             umi.payer = signer;
 
             const onChainData = {
-                name: name,
-                symbol: symbol,
+                name:name,
+                symbol:symbol,
                 uri: uri,
                 sellerFeeBasisPoints: 0,
-                creators: null,
+                creators:null,
                 collection: null,
-                uses: null
+                uses: null    
             };
-            console.log(uri);
+            
 
             const account: CreateMetadataAccountV3InstructionAccounts = {
                 mint: fromWeb3JsPublicKey(mint),
@@ -109,12 +109,17 @@ const CreateToken = () => {
             console.log("Here is the txid", txid);
 
             alert('Token created and minted successfully!');
+
+            const metadata = { name, symbol, uri };
+            localStorage.setItem('tokenMetadata', JSON.stringify(metadata));
+
             
             router.push(`/token?mint=${mintAddress}`)
 
 
 
         } catch (error) {
+            
             console.log(error);
             console.error("Error creating mint:", error);
         }
