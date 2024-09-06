@@ -43,21 +43,23 @@ const TokenDetails = () => {
             const mintPublicKey = new PublicKey(mint);
             const mintInfo = await getMint(connection, mintPublicKey);
             setTokenSupply(Number(mintInfo.supply) / Math.pow(10, mintInfo.decimals));
+            console.log(tokenMetadata.uri)
             fetchTokenImage(tokenMetadata.uri);
         } catch (error) {
             console.error('Error fetching token details:', error);
         }
     };
 
-    const fetchTokenImage = async (uri:string) => {
+    const fetchTokenImage = async (uri:any) => {
         try {
             const response = await fetch(uri);
             const metadata = await response.json();
-            setTokenImage(metadata.image);
+            setTokenImage(metadata.image); // Set the image URL from the metadata
         } catch (error) {
             console.error('Error fetching token image:', error);
         }
     };
+    
 
     const handleCopy = async () => {
         try {
